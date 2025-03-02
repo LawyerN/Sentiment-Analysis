@@ -2,7 +2,7 @@ accelerate==1.3.0
 ace_tools==0.0
 astunparse==1.6.3
 blobfile==3.0.0
-catboost @ https://pypi.org/packages/cp312/c/catboost/catboost-1.2.7-cp312-cp312-win_amd64.whl#sha256=645082f23762c281a7e14fdc23b88e47a3e3bbf8655f5246d80194b104a8ada9
+catboost==1.2.6
 en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
 fastai==2.7.18
 fastapi==0.115.8
@@ -33,7 +33,7 @@ mpmath==1.3.0
 munkres==1.1.4
 networkx==3.4.2
 nltk-punkt==0.6
-numpy==2.0.2
+numpy==1.26.4
 openmeteo_requests==1.3.0
 openmeteo_sdk==1.18.6
 opt_einsum==3.4.0
