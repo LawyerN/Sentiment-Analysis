@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizy Sentymentu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav-tabs {
+            margin-bottom: 20px;
+        }
+        .btn-nav {
+            margin-top: 15px;
+        }
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .language-switch a {
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .language-switch a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Przełącznik języka -->
+    <div class="language-switch">
+    <a href="{{ url_for(request.endpoint, lang='pl') }}" class="btn btn-outline-dark">
+        <i class="fas fa-language"></i> PL
+    </a>
+    <a href="{{ url_for(request.endpoint, lang='en') }}" class="btn btn-outline-dark">
+        <i class="fas fa-globe"></i> EN
+    </a>
+</div>
+
+    <div class="container mt-4">
+        <h1 class="text-center">📊 Analizy Sentymentu</h1>
+        <p class="text-center">Wybierz wykres z zakładek poniżej:</p>
+
+        <!-- Nawigacja do strony głównej i analizy sentymentu -->
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('home', lang=lang) }}" class="btn btn-outline-primary btn-nav">🏠 Strona Główna</a>
+            <a href="{{ url_for('predict', lang=lang) }}" class="btn btn-outline-success btn-nav">🔍 Analizuj Sentiment</a>
+        </div>
+
+        <!-- Zakładki z wykresami -->
+        <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+        {% for i in range(11) %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if i == 0 %}active{% endif %}" id="tab{{ i }}" data-bs-toggle="tab" data-bs-target="#content{{ i }}" type="button" role="tab">
+                {{ wykresy[i] }}
+            </button>
+        </li>
+        {% endfor %}
+        </ul>
+
+        <div class="tab-content mt-3">
+            {% for i in range(11) %}
+            <div class="tab-pane fade {% if i == 0 %}show active{% endif %}" id="content{{ i }}" role="tabpanel">
+                <h3 class="text-center">{{ wykresy[i] }}</h3>
+                <img src="{{ url_for('static', filename='wykres' + (i+1)|string + '.svg') }}" class="img-fluid mx-auto d-block" alt="{{ wykresy[i] }}">
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

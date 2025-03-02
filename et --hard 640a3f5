@@ -1,0 +1,8 @@
+[33mc75e5a7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: reset: moving to origin/main
+[33m640a3f5[m HEAD@{1}: commit: Fixed commit: removed best_ulmfit.pkl and added to .gitignore
+[33m40d79f3[m HEAD@{2}: commit: Added best_ulmfit.pkl to .gitignore
+[33m62b4588[m HEAD@{3}: commit: Added best_ulmfit.pkl with Git LFS
+[33mb6a4526[m HEAD@{4}: commit: Added requirements.txt and updated Readme and structure of project
+[33m2d564af[m HEAD@{5}: commit: Updated transalations and README
+[33mc75e5a7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{6}: Branch: renamed refs/heads/master to refs/heads/main
+[33mc75e5a7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{8}: commit (initial): Nowe repozytorium bez duych plików

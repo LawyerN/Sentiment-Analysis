@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza Sentymentu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .icon {
+            font-size: 50px;
+            color: #007bff;
+        }
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Przełącznik języka (toggle button) -->
+    <div class="language-switch">
+        <a href="{{ url_for(request.endpoint, lang='pl') }}" class="btn btn-outline-dark">
+            <i class="fas fa-language"></i> PL
+        </a>
+        <a href="{{ url_for(request.endpoint, lang='en') }}" class="btn btn-outline-dark">
+            <i class="fas fa-globe"></i> EN
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 class="mb-4">📊 Analiza Sentymentu</h1>
+        <p class="lead">Wybierz jedną z opcji:</p>
+
+        <div class="row mt-5">
+            <!-- Przycisk do Analizy Sentymentu -->
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <i class="icon bi bi-chat-square-text"></i>
+                    <h3>Analizuj Sentyment</h3>
+                    <p>Wpisz tekst i sprawdź, czy jest pozytywny, neutralny czy negatywny.</p>
+                    <a href="{{ url_for('predict', lang=lang) }}" class="btn btn-primary">Przejdź do analizy</a>
+                </div>
+            </div>
+
+            <!-- Przycisk do Analizy Wykresów -->
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <i class="icon bi bi-bar-chart"></i>
+                    <h3>Analizy Wykresów</h3>
+                    <p>Sprawdź szczegółowe wykresy dotyczące analizy sentymentu.</p>
+                    <a href="{{ url_for('analizy', lang=lang) }}" class="btn btn-success">Zobacz wykresy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

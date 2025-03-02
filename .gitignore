@@ -1,0 +1,15 @@
+# Project exclude paths
+/data
+/models/cnn
+/models/zlozone/training_plot.png
+/notebooks/.ipynb_checkpoints
+/notebooks/logistic_regression_model.joblib
+/notebooks/tfidf_vectorizer.joblib
+/plots
+/src/app/static/histogram.svg
+/src/app/static/histogram1.png
+/src/l.py
+/notebooks/glove.6B.100d.txt
+/models/ulmfit/best_ulmfit.pkl
+/models
+/src/app/best_ulmfit.pkl

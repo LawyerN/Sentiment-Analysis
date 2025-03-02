@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza Sentimentu</title>
+    <!-- Import Bootstrap & Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 700px;
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        textarea {
+            resize: none;
+        }
+        .result {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 20px;
+        }
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .language-switch a {
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .language-switch a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Selector języka w prawym górnym rogu -->
+    <div class="language-switch">
+        <a href="{{ url_for(request.endpoint, lang='pl') }}">
+            <i class="bi bi-translate"></i> PL
+        </a>
+        <a href="{{ url_for(request.endpoint, lang='en') }}">
+            <i class="bi bi-globe"></i> EN
+        </a>
+    </div>
+
+    <div class="container">
+        <h2 class="text-center"><i class="bi bi-bar-chart"></i> Analiza Sentymentu</h2>
+        <p class="text-center text-muted">Wpisz komentarz i sprawdź jego sentyment:</p>
+
+        <!-- Nawigacja do strony głównej i analiz -->
+        <div class="d-flex justify-content-between mb-3">
+            <a href="{{ url_for('home', lang=lang) }}" class="btn btn-outline-primary"><i class="bi bi-house-door"></i> Strona Główna</a>
+            <a href="{{ url_for('analizy', lang=lang) }}" class="btn btn-outline-success"><i class="bi bi-bar-chart"></i> Analizy Wykresów</a>
+        </div>
+
+        <form action="{{ url_for('predict', lang=lang) }}" method="post">
+            <div class="mb-3">
+                <label for="text" class="form-label">Wpisz komentarz:</label>
+                <textarea class="form-control" id="text" name="text" rows="4" placeholder="Wpisz tekst do analizy..."></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="model" class="form-label">Wybierz model:</label>
+                <select class="form-select" id="model" name="model">
+                    <option value="model1">Model 1 (Logistic Regression)</option>
+                    <option value="model2">Model 2 (Zestackowany Model)</option>
+                    <option value="model3">Model 3 (LSTM)</option>
+                    <option value="ulmfit">Model 4 (ULMFiT)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Przeanalizuj Sentiment</button>
+        </form>
+
+        {% if sentiment %}
+    <div class="result text-center mt-4">
+        {% if sentiment == "Pozytywny" %}
+            <h4 class="text-success"><i class="bi bi-emoji-smile"></i> Wynik predykcji:</h4>
+            <p class="alert alert-success"><i class="bi bi-hand-thumbs-up"></i> {{ sentiment }}</p>
+        {% elif sentiment == "Neutralny" %}
+            <h4 class="text-warning"><i class="bi bi-emoji-neutral"></i> Wynik predykcji:</h4>
+            <p class="alert alert-warning"><i class="bi bi-hand-thumbs-up"></i> {{ sentiment }}</p>
+        {% elif sentiment == "Negatywny" %}
+            <h4 class="text-danger"><i class="bi bi-emoji-frown"></i> Wynik predykcji:</h4>
+            <p class="alert alert-danger"><i class="bi bi-hand-thumbs-down"></i> {{ sentiment }}</p>
+        {% else %}
+            <h4 class="text-muted"><i class="bi bi-question-circle"></i> Wynik predykcji:</h4>
+            <p class="alert alert-secondary">{{ sentiment }}</p>
+        {% endif %}
+    </div>
+{% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
