@@ -23,14 +23,16 @@ The system includes **four sentiment analysis models**. The models are:
 
 In addition, there are other sentiment classification models in the notebook and files, but they had worse accuracy, so I did not include them in the application(e.g. Random Forest, CNN, 
 
+
 ---
 
 ## 🔥 Features
 ✅ Sentiment classification using multiple ML & Deep Learning models  
-✅ **11 visualizations** of Twitter comments and sentiment analysis
+✅ **11 visualizations** of Twitter comments and sentiment analysis(some aspects were analysed from stop words (sw means; without stop words, other charts are with them) )
 ✅ **Comparison of multiple classifiers** in real-time  
 ✅ RESTful API integration for text-based sentiment analysis  
 ✅ Web-based interface powered by **Flask**  
+✅ bilingual interface Polish and English
 
 ---
 
@@ -41,6 +43,19 @@ In addition, there are other sentiment classification models in the notebook and
 - **Visualization**: Seaborn, matplotlib
 - **Machine Learning**: Scikit-learn, XGBoost, Naïve Bayes, Logistic Regression  
 - **Deep Learning**: TensorFlow/Keras (LSTM), FastAI (ULMFiT)  
+
+---
+
+## 📸 Application Screenshots
+🏠 Main Dashboard
+
+![Flask App Screenshot](https://i.imgur.com/jFkV5ls.png)
+![Flask App Screenshot](https://i.imgur.com/wf1abnp.png)
+
+📊 Sentiment Analysis
+ ![Flask App Ss](https://i.imgur.com/VWVFJvx.png)
+ ![Flask App Ss](https://i.imgur.com/PVgkjGO.png)
+ ![Flask App Ss](https://i.imgur.com/0M1yipv.png)
 
 ---
 
@@ -90,6 +105,8 @@ In addition to standard sentiment distribution plots, we performed **11 in-depth
 ```bash
 git clone https://github.com/LawyerN/Sentiment-Analysis.git
 cd SentimentAnalysis
+cd src
+cd app
 ```
 
 
@@ -106,11 +123,10 @@ pip install -r requirements.txt
 ```
 
 ### 🔹 4. Run the Flask Application
-cd into src/app
 ```bash
 python app.py
 ```
-The application will run on `http://127.0.0.1:8080/`.
+The application will run on `http://127.0.0.1:8080/`. Then just try it out, choose a model then write a comment and see a result.
 
 ---
 
@@ -134,8 +150,8 @@ You can use the RESTful API to analyze sentiment directly:
 ```json
 {
   "sentiment": "Positive"
-  
 }
+
 
 
 
