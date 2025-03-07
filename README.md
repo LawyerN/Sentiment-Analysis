@@ -100,6 +100,7 @@ In addition to standard sentiment distribution plots, we performed **11 in-depth
 ---
 
 ## 📦 Installation & Setup
+Probably you will need to download Microsoft Visual C++ Build Tools and then choose  MSVC v142 - Visual C++ 2019 build tools and Windows 10 SDK
 
 ### 🔹 1. Clone the Repository
 ```bash
