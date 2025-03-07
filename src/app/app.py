@@ -1,5 +1,7 @@
 import os
 import json
+
+import gdown
 import joblib
 import pickle
 import pandas as pd
@@ -16,10 +18,9 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for
 
 app = Flask(__name__)
 
-# 1. USTAWIAMY ŚCIEŻKĘ BAZOWĄ
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 2. Wczytaj plik CSV (zakładamy, że jest w tym samym folderze co app.py)
+
 csv_path = os.path.join(BASE_DIR, "przefiltrowanebezprezydentapowinnobycok.csv")
 df = pd.read_csv(csv_path)
 
@@ -39,7 +40,7 @@ wykresy = [
     "Analiza występowania negacji"
 ]
 
-# 3. Ścieżki do modeli i tokenizera (wszystko w tym samym folderze)
+
 ulmfit_path       = os.path.join(BASE_DIR, "best_ulmfit.pkl")
 logreg_model_path = os.path.join(BASE_DIR, "logistic_regression_model.joblib")
 tfidf_vec_path    = os.path.join(BASE_DIR, "tfidf_vectorizer.joblib")
@@ -47,7 +48,26 @@ stacking_model_path = os.path.join(BASE_DIR, "stacking_model.pkl")
 lstm_model_path   = os.path.join(BASE_DIR, "lstm_best_model.h5")
 tokenizer_path    = os.path.join(BASE_DIR, "tokenizer.json")
 
+file_id = "1LUKN_sLV2O0_J1zgnQeyZMd3H7FcFZm1"
+drive_url = f"https://drive.google.com/uc?id={file_id}"
+
+
+
+if not os.path.exists(ulmfit_path):
+    print("Pobieranie modelu ULMFiT z Google Drive...")
+    gdown.download(drive_url, ulmfit_path, quiet=False)
+    print("Pobieranie zakończone!")
+else:
+    print("Model ULMFiT już istnieje - pominięto pobieranie.")
+
+
+
 # 4. Wczytanie modelu ULMFiT
+if not os.path.exists(ulmfit_path):
+    print("Model nie istnieje, pobieranie z Google Drive...")
+    gdown.download(drive_url, ulmfit_path, quiet=False)
+    print("Pobieranie zakończone!")
+
 with open(ulmfit_path, "rb") as f:
     ulmfit_model = load_learner(f)
 
@@ -155,3 +175,5 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True, host="localhost", port=8080)
+
+
