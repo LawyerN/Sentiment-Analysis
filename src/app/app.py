@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import tensorflow as tf
 
-# Jeśli używasz Keras przez TensorFlow 2.x:
 from keras.src.legacy.preprocessing.text import tokenizer_from_json
 from keras.src.utils import pad_sequences
 
@@ -62,7 +61,7 @@ else:
 
 
 
-# 4. Wczytanie modelu ULMFiT
+# Wczytanie modelu ULMFiT
 if not os.path.exists(ulmfit_path):
     print("Model nie istnieje, pobieranie z Google Drive...")
     gdown.download(drive_url, ulmfit_path, quiet=False)
@@ -71,7 +70,7 @@ if not os.path.exists(ulmfit_path):
 with open(ulmfit_path, "rb") as f:
     ulmfit_model = load_learner(f)
 
-# 5. Wczytanie pozostałych modeli (LogReg, Stacking, LSTM)
+# Wczytanie pozostałych modeli (LogReg, Stacking, LSTM)
 models = {
     "model1": {
         "model": joblib.load(logreg_model_path),
@@ -90,16 +89,15 @@ models = {
     }
 }
 
-# 6. Wczytanie tokenizera dla modelu LSTM
+# Wczytanie tokenizera dla modelu LSTM
 with open(tokenizer_path, "r", encoding="utf-8") as f:
     tokenizer_json_data = json.load(f)
 models["model3"]["tokenizer"] = tokenizer_from_json(tokenizer_json_data)
 
-# 7. Mapowanie etykiet numerycznych na tekst
+# Mapowanie etykiet numerycznych na tekst
 labels = {0: "Negatywny", 2: "Neutralny", 4: "Pozytywny"}
 
 
-# ------------------ ROUTES ------------------
 
 @app.route("/")
 def home():
@@ -133,13 +131,13 @@ def predict():
         else:
             model_data = models[model_name]
 
-            # ---- Modele klasyczne (Logistic Regression, Stacking)
+            # Modele klasyczne (Logistic Regression, Stacking)
             if "vectorizer" in model_data:
                 vectorized = model_data["vectorizer"].transform([text])
                 prediction = model_data["model"].predict(vectorized)
                 sentiment = labels.get(int(prediction[0]))
 
-            # ---- Model LSTM (Keras)
+            # Model LSTM 
             elif "tokenizer" in model_data:
                 tokenizer = model_data["tokenizer"]
                 sequences = tokenizer.texts_to_sequences([text])
@@ -150,7 +148,7 @@ def predict():
                 mapped = [0 if i == 0 else 2 if i == 1 else 4 for i in argmax_indices]
                 sentiment = labels.get(mapped[0])
 
-            # ---- Model ULMFiT (FastAI)
+            # Model ULMFiT 
             elif model_name == "ulmfit":
                 ulmfit_pred = model_data["model"].predict(text)
                 # ulmfit_pred[0] to etykieta fast.ai (np. "0", "1", "2"),
