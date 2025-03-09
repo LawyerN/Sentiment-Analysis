@@ -103,6 +103,7 @@ In addition to standard sentiment distribution plots, we performed **11 in-depth
 Probably you will need to download Microsoft Visual C++ Build Tools and then choose  MSVC v143 - Visual C++ 2019 build tools, Windows 10 SDK, C++ ATL
 
 ### 🔹 1. Clone the Repository
+
 ```bash
 git clone https://github.com/LawyerN/Sentiment-Analysis.git
 cd Sentiment-Analysis
@@ -120,6 +121,7 @@ venv\Scripts\activate      # On Windows
 
 ### 🔹 3. Install Dependencies
 ```bash
+python -m pip install --upgrade pip==25.0.1
 pip install -r requirements.txt
 ```
 
